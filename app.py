@@ -40,4 +40,11 @@ def predict():
         return jsonify(error=str(e)), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import argparse
+    parser = argparse.ArgumentParser(description='Run the Flask app for stock price prediction')
+    parser.add_argument('--host', type=str, default='127.0.0.1', help='Host where the app will run')
+    parser.add_argument('--port', type=int, default=5000, help='Port to bind to')
+    parser.add_argument('--debug', action='store_true', help='Run the app in debug mode')
+    args = parser.parse_args()
+    
+    app.run(host=args.host, port=args.port, debug=args.debug)
